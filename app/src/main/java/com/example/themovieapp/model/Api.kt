@@ -1,4 +1,4 @@
-package com.example.themovieapp
+package com.example.themovieapp.model
 
 import retrofit2.Call
 import retrofit2.http.GET
