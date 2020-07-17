@@ -20,6 +20,12 @@ class MainActivity : AppCompatActivity() {
 
     private var popularMoviesPage = 1
 
+    private lateinit var topRatedMovies: RecyclerView
+    private lateinit var topRatedMoviesAdapter: MoviesAdapter
+    private lateinit var topRatedMoviesLayoutMgr: LinearLayoutManager
+
+    private var topRatedMoviesPage = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,7 +40,18 @@ class MainActivity : AppCompatActivity() {
         popularMoviesAdapter = MoviesAdapter(mutableListOf())
         popularMovies.adapter = popularMoviesAdapter
 
+        topRatedMovies = findViewById(R.id.top_rated_movies)
+        topRatedMoviesLayoutMgr = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        topRatedMovies.layoutManager = topRatedMoviesLayoutMgr
+        topRatedMoviesAdapter = MoviesAdapter(mutableListOf())
+        topRatedMovies.adapter = topRatedMoviesAdapter
+
         getPopularMovies()
+        getTopRatedMovies()
     }
 
     private fun getPopularMovies() {
@@ -64,6 +81,35 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun getTopRatedMovies() {
+        MoviesRepository.getTopRatedMovies(
+            topRatedMoviesPage,
+            ::onTopRatedMoviesFetched,
+            ::onError
+        )
+    }
+
+    private fun attachTopRatedMoviesOnScrollListener(){
+        topRatedMovies.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val totalItemCount = topRatedMoviesLayoutMgr.itemCount
+                val visibleItemCount = topRatedMoviesLayoutMgr.childCount
+                val firstVisibleItem = topRatedMoviesLayoutMgr.findFirstVisibleItemPosition()
+
+                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                    topRatedMovies.removeOnScrollListener(this)
+                    topRatedMoviesPage++
+                    getTopRatedMovies()
+                }
+            }
+        })
+    }
+
+    private fun onTopRatedMoviesFetched(movies: List<Movie>) {
+        topRatedMoviesAdapter.appendMovies(movies)
+        attachTopRatedMoviesOnScrollListener()
     }
 
     private fun onError() {
