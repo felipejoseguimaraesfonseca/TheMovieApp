@@ -5,6 +5,6 @@
     <string name="error_fetch_movies">Por favor verifique a sua conexão com a internet</string>
     <string name="top_rated">Mais Avaliado</string>
     <string name="highest_rated_movies">Os Filmes mais valiados de todos os tempos</string>
-    <string name="upcoming">Próximo</string>
+    <string name="upcoming">Próximos Filmes</string>
     <string name="stay_updated">Fique atualizado com os últimos filmes</string>
 </resources>
