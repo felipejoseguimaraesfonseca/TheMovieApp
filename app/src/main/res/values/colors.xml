@@ -3,4 +3,7 @@
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF5252</color>
+    <color name="editTextColor">#EFEAEA</color>
+    <color name="buttonColor">#646464</color>
+    <color name="textButtonColor">#fff</color>
 </resources>
