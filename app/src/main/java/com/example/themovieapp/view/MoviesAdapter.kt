@@ -1,4 +1,4 @@
-package com.example.themovieapp.viewmodel
+package com.example.themovieapp.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.themovieapp.R
 import com.example.themovieapp.model.Movie
-import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MoviesAdapter(
     private var movies: MutableList<Movie>,
@@ -27,7 +26,7 @@ class MoviesAdapter(
 
     override fun getItemCount(): Int = movies.size
 
-    override fun onBindViewHolder(holder: MoviesAdapter.MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movies[position])
     }
 

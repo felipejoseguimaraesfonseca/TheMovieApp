@@ -3,15 +3,12 @@ package com.example.themovieapp.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovieapp.model.MoviesRepository
 import com.example.themovieapp.R
 import com.example.themovieapp.model.Movie
-import com.example.themovieapp.viewmodel.MoviesAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +41,10 @@ class MainActivity : AppCompatActivity() {
             false
         )
         popularMovies.layoutManager = popularMoviesLayoutMgr
-        popularMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
+        popularMoviesAdapter =
+            MoviesAdapter(mutableListOf()) { movie ->
+                showMovieDetails(movie)
+            }
         popularMovies.adapter = popularMoviesAdapter
 
         topRatedMovies = findViewById(R.id.top_rated_movies)
@@ -54,7 +54,10 @@ class MainActivity : AppCompatActivity() {
             false
         )
         topRatedMovies.layoutManager = topRatedMoviesLayoutMgr
-        topRatedMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie)  }
+        topRatedMoviesAdapter =
+            MoviesAdapter(mutableListOf()) { movie ->
+                showMovieDetails(movie)
+            }
         topRatedMovies.adapter = topRatedMoviesAdapter
 
         upcomingMovies = findViewById(R.id.upcoming_movies)
@@ -64,7 +67,10 @@ class MainActivity : AppCompatActivity() {
             false
         )
         upcomingMovies.layoutManager = upcomingMoviesLayoutMgr
-        upcomingMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie)}
+        upcomingMoviesAdapter =
+            MoviesAdapter(mutableListOf()) { movie ->
+                showMovieDetails(movie)
+            }
         upcomingMovies.adapter = upcomingMoviesAdapter
 
         getPopularMovies()
