@@ -1,5 +1,8 @@
-package com.example.themovieapp.model
+package com.example.themovieapp.data.repository
 
+import com.example.themovieapp.data.model.Api
+import com.example.themovieapp.data.model.GetMoviesResponse
+import com.example.themovieapp.data.model.Movie
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,7 +19,8 @@ object MoviesRepository {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        api = retrofit.create(Api::class.java)
+        api = retrofit.create(
+            Api::class.java)
     }
 
     fun getPopularMovies(

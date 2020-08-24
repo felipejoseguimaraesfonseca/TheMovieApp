@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.themovieapp.model.MoviesRepository
+import com.example.themovieapp.data.repository.MoviesRepository
 import com.example.themovieapp.R
-import com.example.themovieapp.model.Movie
+import com.example.themovieapp.data.model.Movie
 
 class MainActivity : AppCompatActivity() {
 
