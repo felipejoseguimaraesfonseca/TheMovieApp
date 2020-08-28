@@ -5,36 +5,42 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.themovieapp.R
+import com.example.themovieapp.data.constants.UserConstants
+import com.example.themovieapp.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var mViewModel: UserViewModel
+    private var mUserId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        setListeners()
-    }
+        mViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-    private fun setListeners() {
-        buttonLogIn.setOnClickListener(this)
-        textRegisterHere.setOnClickListener(this)
+        setListeners()
+
+        observe()
     }
 
     override fun onClick(view: View) {
         val id = view.id
 
         if (id == R.id.buttonLogIn) {
-            val editEmailString = editEmail.text.toString()
-            val editPasswordString = editPassword.text.toString()
+            val email = editEmail.text.toString()
+            val password = editPassword.text.toString()
 
-            if (editEmailString == "" && editPasswordString == "") {
+            if (email == "" && password == "") {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
-            } else if ( editEmailString == "" || editPasswordString == "") {
+            } else if ( email == "" || password == "") {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
             } else {
+                loadData()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
@@ -43,5 +49,29 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
+    }
+
+    private fun loadData() {
+        val bundle = intent.extras
+        if (bundle != null) {
+            mUserId = bundle.getInt(UserConstants.USERID)
+            mViewModel.load(mUserId)
+        }
+    }
+
+    private fun observe() {
+        mViewModel.user.observe(this, Observer{
+            if (it.toString().toBoolean()) {
+                Toast.makeText(applicationContext, "Sucesso", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(applicationContext, "Falha", Toast.LENGTH_LONG).show()
+            }
+            finish()
+        })
+    }
+
+    private fun setListeners() {
+        buttonLogIn.setOnClickListener(this)
+        textRegisterHere.setOnClickListener(this)
     }
 }

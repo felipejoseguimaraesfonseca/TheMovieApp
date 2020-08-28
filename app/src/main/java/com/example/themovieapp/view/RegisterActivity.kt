@@ -5,42 +5,70 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.themovieapp.R
+import com.example.themovieapp.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
+
+    private lateinit var mViewModel: UserViewModel
+    private var mUserId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        setListeners()
-    }
+        mViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-    private fun setListeners() {
-        buttonCancel.setOnClickListener(this)
-        buttonSignUp.setOnClickListener(this)
+        observe()
+
+        setListeners()
     }
 
     override fun onClick(view: View) {
         val id = view.id
 
-        if ( id == R.id.buttonCancel ) {
+        if (id == R.id.buttonCancel) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        } else if ( id == R.id.buttonSignUp ) {
-            val editNameString = editName.text.toString()
-            val editLastNameString = editLastName.text.toString()
-            val editEmailString = editName.text.toString()
-            val editPasswordString = editPassword.text.toString()
+        } else if (id == R.id.buttonSignUp) {
+            val firstName = editFirstName.text.toString()
+            val lastName = editLastName.text.toString()
+            val email = editEmail.text.toString()
+            val password = editPassword.text.toString()
 
-            if ( editNameString == "" && editLastNameString == "" && editEmailString == "" && editPasswordString == "" ) {
+            if (firstName == "" && lastName == "" && email == "" && password == "") {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
-            } else if ( editNameString == "" || editLastNameString == "" || editEmailString == "" || editPasswordString == "" ) {
+            } else if (firstName == "" || lastName == "" || email == "" || password == "") {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
             } else {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                val intent = Intent(this, MainActivity::class.java)
+                val intUserId = intent.putExtra("mUserId", mUserId).toString().toInt()
+                val intFirstName = intent.putExtra("firstName", firstName).toString()
+                val intLastName = intent.putExtra("lastName", lastName).toString()
+                val intEmail = intent.putExtra("email", email).toString()
+                val intPassword = intent.putExtra("password", password).toString()
+                mViewModel.save(intUserId, intFirstName, intLastName, intEmail, intPassword)
+                startActivity(intent)
             }
         }
+    }
+
+    private fun observe() {
+        mViewModel.saveUser.observe(this, Observer {
+            if (it) {
+                Toast.makeText(applicationContext, "Sucesso", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "Falha", Toast.LENGTH_SHORT).show()
+            }
+            finish()
+        })
+    }
+
+    private fun setListeners() {
+        buttonCancel.setOnClickListener(this)
+        buttonSignUp.setOnClickListener(this)
     }
 }
