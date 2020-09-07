@@ -44,14 +44,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             } else if (firstName == "" || lastName == "" || email == "" || password == "") {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
             } else {
+                mViewModel.save(mUserId, firstName, lastName, email, password)
                 val intent = Intent(this, MainActivity::class.java)
-                val intUserId = intent.putExtra("mUserId", mUserId).toString().toInt()
-                val intFirstName = intent.putExtra("firstName", firstName).toString()
-                val intLastName = intent.putExtra("lastName", lastName).toString()
-                val intEmail = intent.putExtra("email", email).toString()
-                val intPassword = intent.putExtra("password", password).toString()
-                mViewModel.save(intUserId, intFirstName, intLastName, intEmail, intPassword)
                 startActivity(intent)
+                finish()
             }
         }
     }
