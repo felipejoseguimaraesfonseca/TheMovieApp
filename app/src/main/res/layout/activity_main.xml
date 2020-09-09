@@ -12,6 +12,7 @@
 
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -102,59 +103,7 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="670dp"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            app:srcCompat="@drawable/ic_movies" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            app:srcCompat="@drawable/ic_series" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            app:srcCompat="@drawable/ic_favorites" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            app:srcCompat="@drawable/ic_search" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            app:srcCompat="@drawable/ic_my_account" />
-
-    </LinearLayout>
+    <include layout="@layout/bar_navigation"/>
 
 </RelativeLayout>
 
