@@ -17,4 +17,9 @@
     <string name="no_account_app">Não tem uma conta no app?</string>
     <string name="register_here">Registre-se aqui.</string>
     <string name="put_datas">Por favor preencha os dados</string>
+    <string name="item_movies">Filmes</string>
+    <string name="item_series">Séries</string>
+    <string name="item_favorites">Favoritos</string>
+    <string name="item_search">Pesquisar</string>
+    <string name="item_my_account">Conta</string>
 </resources>
