@@ -1,4 +1,4 @@
-package com.example.themovieapp.view
+package com.example.themovieapp.view.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
             } else {
                 loadData()
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, NavigationActivity::class.java))
                 finish()
             }
 

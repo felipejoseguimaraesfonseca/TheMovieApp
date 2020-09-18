@@ -12,19 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MyAccountActivity"></activity>
-        <activity android:name=".view.FavoritesActivity" />
-        <activity android:name=".view.SeriesActivity" />
-        <activity android:name=".view.RegisterActivity" />
-        <activity android:name=".view.LoginActivity">
+        <activity android:name=".view.activities.NavigationActivity"/>
+        <activity android:name=".view.activities.RegisterActivity" />
+        <activity android:name=".view.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MovieDetailsActivity" />
-        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.activities.MovieDetailsActivity" />
+        <activity android:name=".view.activities.MainActivity" />
     </application>
 
 </manifest>

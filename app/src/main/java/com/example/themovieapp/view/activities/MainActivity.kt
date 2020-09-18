@@ -1,4 +1,4 @@
-package com.example.themovieapp.view
+package com.example.themovieapp.view.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.themovieapp.data.repository.MoviesRepository
 import com.example.themovieapp.R
 import com.example.themovieapp.data.model.Movie
+import com.example.themovieapp.view.*
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.themovieapp.view
+package com.example.themovieapp.view.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
             } else {
                 mViewModel.save(mUserId, firstName, lastName, email, password)
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, NavigationActivity::class.java)
                 startActivity(intent)
                 finish()
             }
