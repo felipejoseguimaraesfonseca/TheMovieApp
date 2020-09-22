@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">TheMovieApp</string>
+
     <string name="popular">Popular</string>
+
     <string name="most_popular_movies">Filmes mais populares</string>
     <string name="error_fetch_movies">Por favor verifique a sua conexão com a internet</string>
     <string name="top_rated">Mais Avaliado</string>
-    <string name="highest_rated_movies">Os Filmes mais valiados de todos os tempos</string>
+    <string name="highest_rated_movies">Os filmes mais avaliados de todos os tempos</string>
     <string name="upcoming">Próximos Filmes</string>
     <string name="stay_updated">Fique atualizado com os últimos filmes</string>
+
     <string name="name">Nome</string>
     <string name="last_name">Sobrenome</string>
     <string name="email">Email</string>
@@ -17,11 +20,15 @@
     <string name="no_account_app">Não tem uma conta no app?</string>
     <string name="register_here">Registre-se aqui.</string>
     <string name="put_datas">Por favor preencha os dados</string>
+
     <string name="item_movies">Filmes</string>
     <string name="item_series">Séries</string>
     <string name="item_favorites">Favoritos</string>
     <string name="item_search">Pesquisar</string>
     <string name="item_my_account">Conta</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="most_popular_series">Séries mais populares</string>
+    <string name="highest_rated_series">As séries mais avaliadas de todos os tempos</string>
+    <string name="on_tv">Na TV</string>
+    <string name="series_on_tv">Séries que estão na tv</string>
 </resources>
