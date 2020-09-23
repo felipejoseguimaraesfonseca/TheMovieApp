@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.themovieapp.data.repository.MoviesRepository
 import com.example.themovieapp.R
 import com.example.themovieapp.data.model.Movie
-import com.example.themovieapp.view.*
+import com.example.themovieapp.view.adapters.MoviesAdapter
 
 class MainActivity : AppCompatActivity() {
 
