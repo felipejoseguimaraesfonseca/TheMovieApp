@@ -47,7 +47,7 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         popularMovies = view.findViewById(R.id.popular_movies)
-        popularMoviesLayoutMgr  = LinearLayoutManager(
+        popularMoviesLayoutMgr = LinearLayoutManager(
             this.context,
             LinearLayoutManager.HORIZONTAL,
             false
@@ -127,6 +127,11 @@ class MoviesFragment : Fragment() {
         )
     }
 
+    private fun onTopRatedMoviesFetched(movies: List<Movie>) {
+        topRatedMoviesAdapter.appendMovies(movies)
+        attachTopRatedMoviesOnScrollListener()
+    }
+
     private fun attachTopRatedMoviesOnScrollListener(){
         topRatedMovies.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -143,17 +148,17 @@ class MoviesFragment : Fragment() {
         })
     }
 
-    private fun onTopRatedMoviesFetched(movies: List<Movie>) {
-        topRatedMoviesAdapter.appendMovies(movies)
-        attachTopRatedMoviesOnScrollListener()
-    }
-
     private fun getUpcomingMovies() {
         MoviesRepository.getUpcomingMovies(
             upcomingMoviesPage,
             ::onUpcomingMoviesFetched,
             ::onError
         )
+    }
+
+    private fun onUpcomingMoviesFetched(movies: List<Movie>) {
+        upcomingMoviesAdapter.appendMovies(movies)
+        attachUpcomingMoviesOnScrollListener()
     }
 
     private fun attachUpcomingMoviesOnScrollListener() {
@@ -170,11 +175,6 @@ class MoviesFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun onUpcomingMoviesFetched(movies: List<Movie>) {
-        upcomingMoviesAdapter.appendMovies(movies)
-        attachUpcomingMoviesOnScrollListener()
     }
 
     private fun showMovieDetails(movie: Movie) {
