@@ -31,4 +31,8 @@
     <string name="highest_rated_series">As séries mais avaliadas de todos os tempos</string>
     <string name="on_tv">Na TV</string>
     <string name="series_on_tv">Séries que estão na tv</string>
+    <string name="text_name">Nome:</string>
+    <string name="text_last_name">Sobrenome:</string>
+    <string name="text_email">Email:</string>
+    <string name="button_exit">Sair</string>
 </resources>
