@@ -16,6 +16,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mViewModel: UserViewModel
     private var mUserId: Int = 0
+    private var mEmail: String = ""
+    private var mPassword: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +57,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val bundle = intent.extras
         if (bundle != null) {
             mUserId = bundle.getInt(UserConstants.USERID)
-            mViewModel.load(mUserId)
+            mEmail = bundle.getString(UserConstants.EMAIL).toString()
+            mPassword = bundle.getString(UserConstants.PASSWORD).toString()
+            mViewModel.load(mUserId, mEmail, mPassword)
         }
     }
 
