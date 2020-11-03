@@ -53,13 +53,16 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun loadData() {
+    private fun loadData(){
         val bundle = intent.extras
         if (bundle != null) {
             mUserId = bundle.getInt(UserConstants.USERID)
             mEmail = bundle.getString(UserConstants.EMAIL).toString()
             mPassword = bundle.getString(UserConstants.PASSWORD).toString()
-            mViewModel.load(mUserId, mEmail, mPassword)
+
+            val getId = mViewModel.getUser(mUserId)
+            val getLogin = mViewModel.login(mEmail, mPassword)
+
         }
     }
 

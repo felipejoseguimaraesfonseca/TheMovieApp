@@ -34,7 +34,11 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun load(id: Int, email: String, password: String) {
-        mUser.value = mUserRepository.get(id, email, password)
+    fun getUser(id: Int) {
+        mUser.value = mUserRepository.getUser(id)
+    }
+
+    fun login(email: String, password: String) {
+        mUser.value = mUserRepository.login(email, password)
     }
 }

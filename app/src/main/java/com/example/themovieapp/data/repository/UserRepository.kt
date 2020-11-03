@@ -7,8 +7,12 @@ class UserRepository(context: Context) {
 
     private val mDatabase = AppDatabase.getDatabase(context).userDao()
 
-    fun get(id: Int, email: String, password: String): UserEntity {
-        return mDatabase.load(id, email, password)
+    fun getUser(id: Int): UserEntity {
+        return mDatabase.getUser(id)
+    }
+
+    fun login(email: String, password: String): UserEntity {
+        return mDatabase.login(email, password)
     }
 
     fun save(user: UserEntity): Boolean {
