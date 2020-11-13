@@ -43,8 +43,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
             } else {
                 loadData()
-                startActivity(Intent(this, NavigationActivity::class.java))
-                finish()
             }
 
         } else if (id == R.id.textRegisterHere) {
@@ -63,6 +61,24 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             val getId = mViewModel.getUser(mUserId)
             val getLogin = mViewModel.login(mEmail, mPassword)
 
+            val getIdInt = getId.toString().toInt()
+
+            while (getIdInt > 0) {
+
+                val getLoginString = getLogin.toString()
+
+                if (getLoginString != "") {
+                    val confirmEmail = editEmail.text.toString().toBoolean()
+                    val confirmPassword = editPassword.text.toString().toBoolean()
+
+                    val getLoginBoolean = getLoginString.toBoolean()
+
+                    while (confirmEmail && confirmPassword == getLoginBoolean) {
+                        startActivity(Intent(this, NavigationActivity::class.java))
+                        finish()
+                    }
+                }
+            }
         }
     }
 
