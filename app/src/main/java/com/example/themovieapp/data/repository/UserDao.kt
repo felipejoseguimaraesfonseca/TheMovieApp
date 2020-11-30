@@ -2,11 +2,12 @@ package com.example.themovieapp.data.repository
 
 import androidx.room.*
 import com.example.themovieapp.data.model.UserEntity
+import io.reactivex.Completable
 
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(userEntity: UserEntity): Int
+    fun save(userEntity: UserEntity): Completable
 
     @Query("SELECT * FROM user_data WHERE id = :id ")
     fun getUser(id: Int): UserEntity
