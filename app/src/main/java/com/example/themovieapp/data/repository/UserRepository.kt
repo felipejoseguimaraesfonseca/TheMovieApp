@@ -16,7 +16,7 @@ class UserRepository(context: Context) {
     }
 
     fun save(user: UserEntity): Boolean {
-        return mDatabase.save(user).toString().toInt() > 0
+        return mDatabase.save(user) > 0
     }
 
     fun update(user: UserEntity): Boolean {

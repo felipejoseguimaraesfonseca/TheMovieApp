@@ -21,10 +21,10 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     fun save(id: Int, firstName: String, lastName: String, email: String, password: String) {
         val user = UserEntity().apply {
             this.id = id
-            this.firstName
-            this.lastName
-            this.email
-            this.password
+            this.firstName = firstName
+            this.lastName = lastName
+            this.email = email
+            this.password = password
         }
 
         if (id == 0) {
