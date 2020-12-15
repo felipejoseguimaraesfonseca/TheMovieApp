@@ -8,17 +8,21 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.themovieapp.R
+import com.example.themovieapp.databinding.ActivityRegisterBinding
 import com.example.themovieapp.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mViewModel: UserViewModel
     private var mUserId: Int = 0
 
+    private lateinit var binding: ActivityRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         mViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
@@ -34,10 +38,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         } else if (id == R.id.buttonSignUp) {
-            val firstName = editFirstName.text.toString()
-            val lastName = editLastName.text.toString()
-            val email = editEmail.text.toString()
-            val password = editPassword.text.toString()
+            val firstName = binding.editFirstName.text.toString()
+            val lastName = binding.editLastName.text.toString()
+            val email = binding.editEmail.text.toString()
+            val password = binding.editPassword.text.toString()
 
             if (firstName == "" && lastName == "" && email == "" && password == "") {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
@@ -64,7 +68,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setListeners() {
-        buttonCancel.setOnClickListener(this)
-        buttonSignUp.setOnClickListener(this)
+        binding.buttonCancel.setOnClickListener(this)
+        binding.buttonSignUp.setOnClickListener(this)
     }
 }

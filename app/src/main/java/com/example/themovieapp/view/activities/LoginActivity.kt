@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.themovieapp.R
 import com.example.themovieapp.data.constants.UserConstants
+import com.example.themovieapp.databinding.ActivityLoginBinding
 import com.example.themovieapp.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -19,9 +19,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private var mEmail: String = ""
     private var mPassword: String = ""
 
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         mViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
@@ -34,8 +38,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val id = view.id
 
         if (id == R.id.buttonLogIn) {
-            val email = editEmail.text.toString()
-            val password = editPassword.text.toString()
+            val email = binding.editEmail.text.toString()
+            val password = binding.editPassword.text.toString()
 
             if (email == "" && password == "") {
                 Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
@@ -68,8 +72,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 val getLoginString = getLogin.toString()
 
                 if (getLoginString != "") {
-                    val confirmEmail = editEmail.text.toString().toBoolean()
-                    val confirmPassword = editPassword.text.toString().toBoolean()
+                    val confirmEmail = binding.editEmail.text.toString().toBoolean()
+                    val confirmPassword = binding.editPassword.text.toString().toBoolean()
 
                     val getLoginBoolean = getLoginString.toBoolean()
 
@@ -94,7 +98,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setListeners() {
-        buttonLogIn.setOnClickListener(this)
-        textRegisterHere.setOnClickListener(this)
+        binding.buttonLogIn.setOnClickListener(this)
+        binding.textRegisterHere.setOnClickListener(this)
     }
 }
