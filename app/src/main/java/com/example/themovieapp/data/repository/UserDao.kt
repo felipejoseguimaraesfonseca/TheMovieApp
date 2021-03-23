@@ -7,18 +7,18 @@ import com.example.themovieapp.data.model.UserEntity
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(userEntity: UserEntity): Int
+    suspend fun save(userEntity: UserEntity)
 
     @Query("SELECT * FROM user_data WHERE id = :id ")
-    fun getUser(id: Int): UserEntity
+    suspend fun getUser(id: Int): UserEntity
 
     @Query("SELECT id from user_data WHERE email = :email and password = :password")
-    fun login(email: String, password: String): UserEntity
+    suspend fun login(email: String, password: String): UserEntity
 
     @Update
-    fun update(userEntity: UserEntity): Int
+    suspend fun update(userEntity: UserEntity)
 
     @Delete
-    fun delete(userEntity: UserEntity)
+    suspend fun delete(userEntity: UserEntity)
 
 }

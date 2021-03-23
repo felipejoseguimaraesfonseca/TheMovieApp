@@ -19,6 +19,6 @@ data class UserEntity (
     @ColumnInfo(name = "email")
     var email: String? = "",
 
-    @ColumnInfo(name= "password")
+    @ColumnInfo(name = "password")
     var password: String? = ""
 )

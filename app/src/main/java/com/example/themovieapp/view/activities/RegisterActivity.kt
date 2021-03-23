@@ -1,15 +1,16 @@
 package com.example.themovieapp.view.activities
 
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.themovieapp.R
 import com.example.themovieapp.databinding.ActivityRegisterBinding
 import com.example.themovieapp.viewmodel.UserViewModel
+import com.example.themovieapp.viewmodel.UserViewModelFactory
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -24,7 +25,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         val view = binding.root
         setContentView(view)
 
-        mViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        val viewModelFactory = UserViewModelFactory(Application())
+        mViewModel = ViewModelProvider(
+            this, viewModelFactory
+        ).get(UserViewModel::class.java)
 
         observe()
 
@@ -44,9 +48,17 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             val password = binding.editPassword.text.toString()
 
             if (firstName == "" && lastName == "" && email == "" && password == "") {
-                Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.put_datas),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else if (firstName == "" || lastName == "" || email == "" || password == "") {
-                Toast.makeText(this, getString(R.string.put_datas), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.put_datas),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 mViewModel.save(mUserId, firstName, lastName, email, password)
                 val intent = Intent(this, LoginActivity::class.java)
@@ -57,7 +69,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun observe() {
-        mViewModel.saveUser.observe(this, Observer {
+        mViewModel.saveUser.observe(this, {
             if (it) {
                 Toast.makeText(applicationContext, "Sucesso", Toast.LENGTH_SHORT).show()
             } else {

@@ -35,4 +35,6 @@
     <string name="text_last_name">Sobrenome:</string>
     <string name="text_email">Email:</string>
     <string name="button_exit">Sair</string>
+
+    <string name="datas_not_found">Não encontramos os seus dados. Por favor preencha os seus dados corretamente.</string>
 </resources>

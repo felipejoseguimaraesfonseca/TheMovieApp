@@ -7,23 +7,25 @@ class UserRepository(context: Context) {
 
     private val mDatabase = AppDatabase.getDatabase(context).userDao()
 
-    fun getUser(id: Int): UserEntity {
+     suspend fun getUser(id: Int): UserEntity {
         return mDatabase.getUser(id)
     }
 
-    fun login(email: String, password: String): UserEntity {
+    suspend fun login(email: String, password: String = ""): UserEntity {
         return mDatabase.login(email, password)
     }
 
-    fun save(user: UserEntity): Boolean {
-        return mDatabase.save(user) > 0
+    suspend fun save(user: UserEntity): Boolean {
+        val mDatabaseInt = mDatabase.save(user).toString().toInt()
+        return mDatabaseInt > 0
     }
 
-    fun update(user: UserEntity): Boolean {
-        return mDatabase.update(user) > 0
+    suspend fun update(user: UserEntity): Boolean {
+        val mDatabaseInt = mDatabase.update(user).toString().toInt()
+        return mDatabaseInt > 0
     }
-    
-    fun delete(user: UserEntity) {
+
+    suspend fun delete(user: UserEntity) {
         mDatabase.delete(user)
     }
 
