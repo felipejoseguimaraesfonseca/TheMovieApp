@@ -2,7 +2,6 @@ package com.example.themovieapp.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
 import com.example.themovieapp.data.model.UserEntity
 import com.example.themovieapp.data.repository.UserRepository
@@ -10,9 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @SuppressLint("StaticFieldLeak")
-class UserViewModel(application: Application): AndroidViewModel(application) {
-    
-    private val mContext: Context = application.applicationContext
+class UserViewModel constructor(application: Application) : AndroidViewModel(application) {
+
+    private val mContext = application.applicationContext
     private val mUserRepository: UserRepository = UserRepository(mContext)
 
     private val mSaveUser = MutableLiveData<Boolean>()
@@ -32,9 +31,9 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             }
 
             if (id == 0) {
-                mSaveUser.value = mUserRepository.save(user)
+                mSaveUser.postValue(mUserRepository.save(user))
             } else {
-                mSaveUser.value = mUserRepository.update(user)
+                mSaveUser.postValue(mUserRepository.update(user))
             }
         }
     }
@@ -44,17 +43,27 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             val getUserId = UserEntity().apply {
                 this.id = id
             }
-            mUser.value = mUserRepository.getUser(getUserId.toString().toInt())
+
+            val getUserIdInt = getUserId.toString().toInt()
+
+            mUser.postValue(mUserRepository.getUser(getUserIdInt))
         }
     }
 
     fun login(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val getLogin = UserEntity().apply {
+            val getEmail = UserEntity().apply {
                 this.email = email
+            }
+
+            val getPassword = UserEntity().apply {
                 this.password = password
             }
-            mUser.value = mUserRepository.login(getLogin.toString())
+
+            val getEmailString = getEmail.toString()
+            val getPasswordString = getPassword.toString()
+
+            mUser.postValue(mUserRepository.login(getEmailString, getPasswordString))
         }
     }
 }

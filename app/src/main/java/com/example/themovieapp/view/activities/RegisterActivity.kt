@@ -1,6 +1,5 @@
 package com.example.themovieapp.view.activities
 
-import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.themovieapp.R
 import com.example.themovieapp.databinding.ActivityRegisterBinding
 import com.example.themovieapp.viewmodel.UserViewModel
-import com.example.themovieapp.viewmodel.UserViewModelFactory
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -25,9 +23,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         val view = binding.root
         setContentView(view)
 
-        val viewModelFactory = UserViewModelFactory(Application())
-        mViewModel = ViewModelProvider(
-            this, viewModelFactory
+        mViewModel = ViewModelProvider(this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(UserViewModel::class.java)
 
         observe()
@@ -60,7 +57,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                mViewModel.save(mUserId, firstName, lastName, email, password)
+                this.mViewModel.save(mUserId, firstName, lastName, email, password)
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -69,8 +66,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun observe() {
-        mViewModel.saveUser.observe(this, {
-            if (it) {
+        this.mViewModel.saveUser.observe(this, {
+            if (it == null) {
                 Toast.makeText(applicationContext, "Sucesso", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(applicationContext, "Falha", Toast.LENGTH_SHORT).show()

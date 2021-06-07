@@ -1,6 +1,5 @@
 package com.example.themovieapp.view.activities
 
-import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.themovieapp.R
 import com.example.themovieapp.databinding.ActivityLoginBinding
 import com.example.themovieapp.viewmodel.UserViewModel
-import com.example.themovieapp.viewmodel.UserViewModelFactory
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -23,14 +21,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val view = binding.root
         setContentView(view)
 
-        val viewModelFactory = UserViewModelFactory(Application())
-        mViewModel = ViewModelProvider(
-            this, viewModelFactory
+        mViewModel = ViewModelProvider(this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(UserViewModel::class.java)
 
-        setListeners()
-
         observe()
+
+        setListeners()
     }
 
     override fun onClick(view: View) {
@@ -52,9 +49,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     getString(R.string.put_datas),
                     Toast.LENGTH_SHORT
                 ).show()
-            } else {
-                val bundle = intent.extras
-                if (bundle != null) {
+            } else if (email != "" && password != "") {
+                if (this::mViewModel.isInitialized) {
                     val login = mViewModel.login(email, password)
                     if (login.toString() != "") {
                         val intent = Intent(this, NavigationActivity::class.java)
@@ -77,9 +73,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun observe() {
-        mViewModel.user.observe(this, {
-            if (it.toString().toBoolean()) {
+   private fun observe() {
+        this.mViewModel.user.observe( this, {
+            if (it == null) {
                 Toast.makeText(applicationContext, "Sucesso", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(applicationContext, "Falha", Toast.LENGTH_LONG).show()

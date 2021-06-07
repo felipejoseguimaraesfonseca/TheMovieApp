@@ -37,4 +37,5 @@
     <string name="button_exit">Sair</string>
 
     <string name="datas_not_found">Não encontramos os seus dados. Por favor preencha os seus dados corretamente.</string>
+    <string name="unexpected_error">Ouve um erro inesperado. Tente novamente.</string>
 </resources>
