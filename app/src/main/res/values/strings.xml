@@ -36,6 +36,16 @@
     <string name="text_email">Email:</string>
     <string name="button_exit">Sair</string>
 
-    <string name="datas_not_found">Não encontramos os seus dados. Por favor preencha os seus dados corretamente.</string>
-    <string name="unexpected_error">Ouve um erro inesperado. Tente novamente.</string>
+    <string name="account_saved_successfully">Conta salvada com sucesso.</string>
+    <string name="account_updated_successfully">Conta atualizada com sucesso.</string>
+    <string name="account_deleted_successfully">Conta deletada com successo.</string>
+    <string name="account_logged_successfully">Successo ao entrar na conta.</string>
+
+    <string name="account_save_error">Erro ao salvar a conta.</string>
+    <string name="account_update_error">Erro ao atualizar a conta.</string>
+    <string name="account_delete_error">Erro ao deletar a conta.</string>
+    <string name="account_login_error">
+        Não encontramos os seus dados. Por favor preencha os seus dados corretamente.
+    </string>
+
 </resources>

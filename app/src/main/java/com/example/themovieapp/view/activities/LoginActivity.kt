@@ -21,7 +21,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val view = binding.root
         setContentView(view)
 
-        mViewModel = ViewModelProvider(this,
+        mViewModel = ViewModelProvider(
+            this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(UserViewModel::class.java)
 
@@ -33,10 +34,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         val id = view.id
 
-        if (id == R.id.buttonLogIn) {
-            val email = binding.editEmail.text.toString()
-            val password = binding.editPassword.text.toString()
+        val email = binding.editEmail.text.toString()
+        val password = binding.editPassword.text.toString()
 
+        if (id == R.id.buttonLogIn) {
             if (email == "" && password == "") {
                 Toast.makeText(
                     this,
@@ -49,21 +50,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     getString(R.string.put_datas),
                     Toast.LENGTH_SHORT
                 ).show()
-            } else if (email != "" && password != "") {
-                if (this::mViewModel.isInitialized) {
-                    val login = mViewModel.login(email, password)
-                    if (login.toString() != "") {
-                        val intent = Intent(this, NavigationActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(
-                            this,
-                            getString(R.string.datas_not_found),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+            } else {
+                mViewModel.login(email, password)
+                val intent = Intent(this, NavigationActivity::class.java)
+                startActivity(intent)
+                finish()
             }
 
         } else if (id == R.id.textRegisterHere) {
@@ -73,16 +64,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-   private fun observe() {
-        this.mViewModel.user.observe( this, {
-            if (it == null) {
-                Toast.makeText(applicationContext, "Sucesso", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(applicationContext, "Falha", Toast.LENGTH_LONG).show()
-            }
-            finish()
+    private fun observe() {
+        mViewModel.messageEventData.observe(this, { stringResId ->
+            Toast.makeText(this, stringResId, Toast.LENGTH_SHORT).show()
         })
     }
+
 
     private fun setListeners() {
         binding.buttonLogIn.setOnClickListener(this)

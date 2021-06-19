@@ -23,7 +23,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         val view = binding.root
         setContentView(view)
 
-        mViewModel = ViewModelProvider(this,
+        mViewModel = ViewModelProvider(
+            this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(UserViewModel::class.java)
 
@@ -33,17 +34,17 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        val id = view.id
+        val idClick = view.id
 
-        if (id == R.id.buttonCancel) {
+        val firstName = binding.editFirstName.text.toString()
+        val lastName = binding.editLastName.text.toString()
+        val email = binding.editEmail.text.toString()
+        val password = binding.editPassword.text.toString()
+
+        if (idClick == R.id.buttonCancel) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        } else if (id == R.id.buttonSignUp) {
-            val firstName = binding.editFirstName.text.toString()
-            val lastName = binding.editLastName.text.toString()
-            val email = binding.editEmail.text.toString()
-            val password = binding.editPassword.text.toString()
-
+        } else if (idClick == R.id.buttonSignUp) {
             if (firstName == "" && lastName == "" && email == "" && password == "") {
                 Toast.makeText(
                     this,
@@ -57,7 +58,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                this.mViewModel.save(mUserId, firstName, lastName, email, password)
+                mViewModel.save(mUserId, firstName, lastName, email, password)
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -66,13 +67,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun observe() {
-        this.mViewModel.saveUser.observe(this, {
-            if (it == null) {
-                Toast.makeText(applicationContext, "Sucesso", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(applicationContext, "Falha", Toast.LENGTH_SHORT).show()
-            }
-            finish()
+        mViewModel.messageEventData.observe(this, { stringResId ->
+            Toast.makeText(this, stringResId, Toast.LENGTH_SHORT).show()
         })
     }
 

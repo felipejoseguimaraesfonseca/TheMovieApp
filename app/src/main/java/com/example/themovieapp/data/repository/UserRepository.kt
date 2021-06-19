@@ -7,14 +7,6 @@ class UserRepository(context: Context) {
 
     private val mDatabase = AppDatabase.getDatabase(context).userDao()
 
-    suspend fun getUser(id: Int): UserEntity {
-        return mDatabase.getUser(id)
-    }
-
-    suspend fun login(email: String, password: String): UserEntity {
-        return mDatabase.login(email, password)
-    }
-
     suspend fun save(user: UserEntity): Boolean? {
         return try {
             val databaseSaveString = mDatabase.save(user).toString()
@@ -23,6 +15,10 @@ class UserRepository(context: Context) {
         } catch (e: NumberFormatException) {
             null
         }
+    }
+
+    suspend fun login(email: String, password: String): UserEntity {
+        return mDatabase.login(email, password)
     }
 
     suspend fun update(user: UserEntity): Boolean {

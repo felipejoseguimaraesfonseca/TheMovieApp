@@ -2,23 +2,26 @@ package com.example.themovieapp.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.themovieapp.R
 import com.example.themovieapp.data.model.UserEntity
 import com.example.themovieapp.data.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@SuppressLint("StaticFieldLeak")
 class UserViewModel constructor(application: Application) : AndroidViewModel(application) {
 
+    @SuppressLint("StaticFieldLeak")
     private val mContext = application.applicationContext
     private val mUserRepository: UserRepository = UserRepository(mContext)
 
     private val mSaveUser = MutableLiveData<Boolean>()
-    val saveUser: LiveData<Boolean> = mSaveUser
 
-    private val mUser = MutableLiveData<UserEntity>()
-    val user: LiveData<UserEntity> = mUser
+    private val _messageEventData = MutableLiveData<Int>()
+    val messageEventData: LiveData<Int>
+        get() = _messageEventData
 
     fun save(id: Int, firstName: String, lastName: String, email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,40 +33,39 @@ class UserViewModel constructor(application: Application) : AndroidViewModel(app
                 this.password = password
             }
 
-            if (id == 0) {
-                mSaveUser.postValue(mUserRepository.save(user))
-            } else {
-                mSaveUser.postValue(mUserRepository.update(user))
+            try {
+                if (id == 0) {
+                    mSaveUser.postValue(mUserRepository.save(user))
+                    _messageEventData.postValue(R.string.account_saved_successfully)
+                } else {
+                    mSaveUser.postValue(mUserRepository.update(user))
+                    _messageEventData.postValue(R.string.account_updated_successfully)
+                }
+            } catch (exception: Exception) {
+                _messageEventData.postValue(R.string.account_save_error)
+                Log.e(TAG, exception.toString())
             }
-        }
-    }
-
-    fun getUser(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val getUserId = UserEntity().apply {
-                this.id = id
-            }
-
-            val getUserIdInt = getUserId.toString().toInt()
-
-            mUser.postValue(mUserRepository.getUser(getUserIdInt))
         }
     }
 
     fun login(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val getEmail = UserEntity().apply {
-                this.email = email
+
+            try {
+                val getUser = mUserRepository.login(email, password)
+
+                if (getUser.email == email && getUser.password == password) {
+                     mUserRepository.login(email, password)
+                    _messageEventData.postValue(R.string.account_logged_successfully)
+                }
+            } catch(exception: Exception) {
+                _messageEventData.postValue(R.string.account_login_error)
+                Log.e(TAG, exception.toString())
             }
-
-            val getPassword = UserEntity().apply {
-                this.password = password
-            }
-
-            val getEmailString = getEmail.toString()
-            val getPasswordString = getPassword.toString()
-
-            mUser.postValue(mUserRepository.login(getEmailString, getPasswordString))
         }
+    }
+
+    companion object {
+        private val TAG = UserViewModel::class.java.simpleName
     }
 }
