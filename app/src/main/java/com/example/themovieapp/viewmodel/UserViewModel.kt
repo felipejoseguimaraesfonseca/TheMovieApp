@@ -18,6 +18,8 @@ class UserViewModel constructor(application: Application) : AndroidViewModel(app
     private val mUserRepository: UserRepository = UserRepository(mContext)
 
     private val mSaveUser = MutableLiveData<Boolean>()
+    private val mUpdateUser = MutableLiveData<Boolean>()
+    private val mDeleteUser = MutableLiveData<Boolean>()
 
     private val _messageEventData = MutableLiveData<Int>()
     val messageEventData: LiveData<Int>
@@ -50,17 +52,66 @@ class UserViewModel constructor(application: Application) : AndroidViewModel(app
 
     fun login(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-
             try {
                 val getUser = mUserRepository.login(email, password)
 
                 if (getUser.email == email && getUser.password == password) {
-                     mUserRepository.login(email, password)
+                    mUserRepository.login(email, password)
                     _messageEventData.postValue(R.string.account_logged_successfully)
                 }
-            } catch(exception: Exception) {
+            } catch (exception: Exception) {
                 _messageEventData.postValue(R.string.account_login_error)
                 Log.e(TAG, exception.toString())
+            }
+        }
+    }
+
+    fun updateUser(
+        id: Int,
+        firstName: String,
+        lastName: String,
+        email: String,
+        password: String
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val upadteUser = UserEntity().apply {
+                this.id = id
+                this.firstName = firstName
+                this.lastName = lastName
+                this.email = email
+                this.password = password
+            }
+
+            try {
+                if (id > 0) {
+                    mUpdateUser.postValue(mUserRepository.update(upadteUser))
+                    _messageEventData.postValue(R.string.account_updated_successfully)
+                }
+            } catch (exception: Exception) {
+                _messageEventData.postValue(R.string.account_update_error)
+                Log.e(TAG, exception.toString())
+            }
+        }
+    }
+
+    fun delete(id: Int, firstName: String, lastName: String, email: String, password: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            val deleteUser = UserEntity().apply {
+                this.id = id
+                this.firstName = firstName
+                this.lastName = lastName
+                this.email = email
+                this.password = password
+            }
+
+            try {
+                if (id > 0) {
+                    mDeleteUser.postValue(mUserRepository.delete(deleteUser))
+                    _messageEventData.postValue(R.string.account_deleted_successfully)
+                }
+            } catch (exception: Exception) {
+                _messageEventData.postValue(R.string.account_delete_error)
             }
         }
     }

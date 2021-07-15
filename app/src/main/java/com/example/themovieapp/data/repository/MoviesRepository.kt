@@ -114,5 +114,7 @@ object MoviesRepository {
 
             })
     }
+
+    suspend fun searchMovies(searchQuery: String, page: Int) = api.searchMovies(searchQuery, page)
 }
 

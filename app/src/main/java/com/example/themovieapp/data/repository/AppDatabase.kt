@@ -4,12 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.themovieapp.data.model.Movie
+import com.example.themovieapp.data.model.Serie
 import com.example.themovieapp.data.model.UserEntity
 
-@Database(entities = [UserEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UserEntity::class, Movie::class, Serie::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun favoritesMoviesDao(): FavoritesMoviesDao
+    abstract fun favoritesSeriesDao(): FavoritesSeriesDao
 
     companion object {
         private lateinit var INSTANCE: AppDatabase

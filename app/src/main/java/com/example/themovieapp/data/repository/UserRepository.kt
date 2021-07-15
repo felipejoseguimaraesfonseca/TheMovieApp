@@ -26,8 +26,7 @@ class UserRepository(context: Context) {
         return mDatabaseInt > 0
     }
 
-    suspend fun delete(user: UserEntity) {
-        mDatabase.delete(user)
+    suspend fun delete(user: UserEntity): Boolean {
+        return mDatabase.delete(user).toString().toBoolean()
     }
-
 }

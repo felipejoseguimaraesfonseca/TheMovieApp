@@ -51,10 +51,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
+                val observer = observe()
+
                 mViewModel.login(email, password)
-                val intent = Intent(this, NavigationActivity::class.java)
-                startActivity(intent)
-                finish()
+
+                if (observer.toString().toInt() == R.string.account_logged_successfully) {
+                    val intent = Intent(this, NavigationActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
 
         } else if (id == R.id.textRegisterHere) {

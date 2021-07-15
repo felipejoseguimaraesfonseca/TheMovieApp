@@ -34,18 +34,45 @@
     <string name="text_name">Nome:</string>
     <string name="text_last_name">Sobrenome:</string>
     <string name="text_email">Email:</string>
-    <string name="button_exit">Sair</string>
 
-    <string name="account_saved_successfully">Conta salvada com sucesso.</string>
-    <string name="account_updated_successfully">Conta atualizada com sucesso.</string>
-    <string name="account_deleted_successfully">Conta deletada com successo.</string>
-    <string name="account_logged_successfully">Successo ao entrar na conta.</string>
 
-    <string name="account_save_error">Erro ao salvar a conta.</string>
-    <string name="account_update_error">Erro ao atualizar a conta.</string>
-    <string name="account_delete_error">Erro ao deletar a conta.</string>
+    <string name="account_saved_successfully">Conta salvada com sucesso</string>
+    <string name="account_updated_successfully">Conta atualizada com sucesso</string>
+    <string name="account_deleted_successfully">Conta deletada com successo</string>
+    <string name="account_logged_successfully">Successo ao entrar na conta</string>
+
+    <string name="account_save_error">Erro ao salvar a conta</string>
+    <string name="account_update_error">Erro ao atualizar a conta</string>
+    <string name="account_delete_error">Erro ao deletar a conta</string>
     <string name="account_login_error">
-        Não encontramos os seus dados. Por favor preencha os seus dados corretamente.
+        Não encontramos os seus dados. Por favor preencha os seus dados corretamente
     </string>
+
+    <string name="delete_account_message">Você tem certeza de querer deletar a sua conta?</string>
+    <string name="logout_account_message">Você tem certeza de querer sair da sua conta?</string>
+    <string name="update_account_message">Você tem certeza de querer atualizar a sua conta?</string>
+    <string name="delete_title_message">Deletar conta</string>
+    <string name="delete_no_account_message">Você não deletou a sua conta</string>
+    <string name="logout_tilte_message">Sair da conta</string>
+    <string name="logout_no_account_message">Você não saiu da conta</string>
+    <string name="update_title_message">Atualizar Conta</string>
+    <string name="update_no_account_message">Você não atualizou a sua conta</string>
+    <string name="favorite_movie_successfully_saved">Sucesso ao salvar o filme como favorito</string>
+    <string name="favorite_movie_failure_saved">Falha ao salvar o filme como favorito</string>
+    <string name="favorite_serie_successfully_saved">Sucesso ao salvar a série como favorito</string>
+    <string name="favorite_serie_failure_saved">Falha ao salvar a série como favorito</string>
+    <string name="favorite_movie_successfully_deleted">Sucesso ao deletar o filme como favorito</string>
+    <string name="favorite_movie_failure_deleted">Falha ao deletar o filme como favorito</string>
+    <string name="favorite_serie_successfully_deleted">Sucesso ao deletar a série como favorito</string>
+    <string name="favorite_serie_failure_deleted">Falha ao deletar a série como favorito</string>
+
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+
+    <string name="button_exit">Sair</string>
+    <string name="button_delete">Deletar</string>
+    <string name="button_update">Atualizar</string>
+
+    <string name="search">Pesquisar</string>
 
 </resources>

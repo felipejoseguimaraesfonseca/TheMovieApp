@@ -5,16 +5,14 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.themovieapp.R
 import com.example.themovieapp.databinding.ActivityNavigationBinding
-import com.example.themovieapp.view.fragments.FavoritesFragment
-import com.example.themovieapp.view.fragments.MoviesFragment
-import com.example.themovieapp.view.fragments.MyAccountFragment
-import com.example.themovieapp.view.fragments.SeriesFragment
+import com.example.themovieapp.view.fragments.*
 
 class NavigationActivity : AppCompatActivity() {
 
     private val moviesFragment = MoviesFragment()
     private val seriesFragment = SeriesFragment()
     private val favoritesFragment = FavoritesFragment()
+    private val searchFragment = SearchFragment()
     private val myAccountFragment = MyAccountFragment()
 
     private lateinit var binding: ActivityNavigationBinding
@@ -31,6 +29,7 @@ class NavigationActivity : AppCompatActivity() {
                 R.id.ic_movies -> replaceFragment(moviesFragment)
                 R.id.ic_series -> replaceFragment(seriesFragment)
                 R.id.ic_favorites -> replaceFragment(favoritesFragment)
+                R.id.ic_search -> replaceFragment(searchFragment)
                 R.id.ic_my_account -> replaceFragment(myAccountFragment)
             }
             true

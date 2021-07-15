@@ -89,17 +89,17 @@
         android:layout_marginBottom="209dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button_exit_account"
+        app:layout_constraintBottom_toTopOf="@+id/button_update_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_email"
         app:layout_constraintTop_toBottomOf="@+id/text_last_name" />
 
     <Button
         android:id="@+id/button_exit_account"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="102dp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="100dp"
         android:background="@color/buttonColor"
         android:text="@string/button_exit"
         android:textColor="@color/textButtonColor"
@@ -107,7 +107,39 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/button_update_account" />
+
+    <Button
+        android:id="@+id/button_delete_account"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="100dp"
+        android:background="@color/buttonColor"
+        android:text="@string/button_delete"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_update_account"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_update_account"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="146dp"
+        android:layout_marginBottom="100dp"
+        android:background="@color/buttonColor"
+        android:gravity="center"
+        android:text="@string/button_update"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_delete_account" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

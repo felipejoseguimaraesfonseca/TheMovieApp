@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -15,6 +17,18 @@ class SeriesAdapter (
     private var onSerieClick: (serie: Serie) -> Unit
 ) : RecyclerView.Adapter<SeriesAdapter.SerieViewHolder>() {
 
+    private val differCallback = object : DiffUtil.ItemCallback<Serie>() {
+        override fun areItemsTheSame(oldItem: Serie, newItem: Serie): Boolean {
+            return oldItem.title == newItem.title
+        }
+
+        override fun areContentsTheSame(oldItem: Serie, newItem: Serie): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -25,10 +39,11 @@ class SeriesAdapter (
         return SerieViewHolder(view)
     }
 
-    override fun getItemCount(): Int = series.size
+    override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: SerieViewHolder, position: Int) {
-        holder.bind(series[position])
+        val serie = differ.currentList[position]
+        holder.bind(serie)
     }
 
     fun appendSeries(series: List<Serie>) {

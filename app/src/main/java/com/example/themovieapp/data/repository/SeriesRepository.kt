@@ -113,4 +113,6 @@ object SeriesRepository {
 
             })
     }
+
+    suspend fun searchSeries(searchQuery: String, page: Int) = api.searchSeries(searchQuery, page)
 }
